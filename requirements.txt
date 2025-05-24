@@ -1,0 +1,30 @@
+# Flask và extensions
+Flask==2.3.3
+Flask-SocketIO==5.3.4
+Flask-CORS==4.0.0
+
+# Cryptography
+pycryptodome==3.18.0
+
+# WebSocket
+python-socketio==5.9.0
+python-engineio==4.7.1
+
+# Database
+SQLAlchemy==2.0.21
+Flask-SQLAlchemy==3.0.5
+
+# Environment và utilities
+python-dotenv==1.0.0
+werkzeug==2.3.7
+
+# File handling
+python-magic==0.4.27
+
+# Testing
+pytest==7.4.2
+pytest-cov==4.1.0
+
+# Additional
+eventlet==0.33.3
+requests==2.31.0
