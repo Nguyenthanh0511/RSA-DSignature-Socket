@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống truyền file bảo mật RSA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Hệ thống truyền file bảo mật</h1>
+            <p class="subtitle">Sử dụng mã hóa RSA và chữ ký số</p>
+        </header>
+
+        <main class="main-content">
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔑</div>
+                    <h3>Mã hóa RSA</h3>
+                    <p>Bảo vệ file với mã hóa RSA 2048-bit</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <h3>Chữ ký số</h3>
+                    <p>Xác thực nguồn gốc và tính toàn vẹn</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Truyền file an toàn</h3>
+                    <p>Giao tiếp real-time qua WebSocket</p>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <h2>Chọn vai trò của bạn</h2>
+                <div class="role-buttons">
+                    <a href="/sender" class="btn btn-primary btn-large">
+                        <span class="btn-icon">📤</span>
+                        <span>Người gửi</span>
+                    </a>
+                    <a href="/receiver" class="btn btn-secondary btn-large">
+                        <span class="btn-icon">📥</span>
+                        <span>Người nhận</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>Cách hoạt động</h2>
+                <ol class="steps">
+                    <li>
+                        <strong>Tạo khóa:</strong> Hệ thống tự động tạo cặp khóa RSA cho mỗi người dùng
+                    </li>
+                    <li>
+                        <strong>Mã hóa file:</strong> Người gửi mã hóa file với khóa công khai của người nhận
+                    </li>
+                    <li>
+                        <strong>Ký số:</strong> Người gửi ký file với khóa riêng tư của mình
+                    </li>
+                    <li>
+                        <strong>Truyền file:</strong> File được truyền an toàn qua kênh mã hóa
+                    </li>
+                    <li>
+                        <strong>Xác thực:</strong> Người nhận xác thực chữ ký và giải mã file
+                    </li>
+                </ol>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Secure File Transfer System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

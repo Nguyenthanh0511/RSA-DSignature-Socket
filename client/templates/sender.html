@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi File - Hệ thống truyền file bảo mật</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📤 Gửi File Bảo Mật</h1>
+            <p class="subtitle">Mã hóa và ký số file trước khi gửi</p>
+        </header>
+
+        <main class="main-content">
+            <!-- User Registration Section -->
+            <section class="user-section">
+                <div class="form-group">
+                    <label for="sender-id">ID Người gửi:</label>
+                    <input type="text" id="sender-id" class="form-control" placeholder="Nhập ID của bạn">
+                    <button id="register-btn" class="btn btn-primary" style="margin-top: 0.5rem;">
+                        Đăng ký / Kết nối
+                    </button>
+                </div>
+                
+                <div id="connection-status" class="alert alert-info" style="display: none;"></div>
+            </section>
+
+            <!-- Key Management Section -->
+            <section id="key-section" style="display: none;">
+                <h2>🔑 Quản lý khóa</h2>
+                <div class="key-info">
+                    <div class="form-group">
+                        <label>Khóa công khai của bạn:</label>
+                        <textarea id="public-key-display" class="form-control" rows="5" readonly></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="private-key-input">Nhập khóa riêng tư của bạn:</label>
+                        <textarea id="private-key-input" class="form-control" rows="5" 
+                                  placeholder="Paste your private key here..."></textarea>
+                        <small style="color: #666;">⚠️ Khóa riêng tư chỉ được lưu locally, không gửi lên server</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Upload Section -->
+            <section id="file-section" style="display: none;">
+                <h2>📁 Chọn file để gửi</h2>
+                <div class="file-upload-area">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="file-input" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif,.doc,.docx,.json,.xml">
+                        <label for="file-input" class="file-input-label">
+                            <span>📎</span>
+                            <span>Chọn file</span>
+                        </label>
+                    </div>
+                    <div id="file-info" style="margin-top: 1rem;"></div>
+                </div>
+
+                <!-- File Editor (for text files) -->
+                <div id="file-editor" class="file-editor" style="display: none;">
+                    <h3>✏️ Chỉnh sửa nội dung file</h3>
+                    <textarea id="file-content" class="form-control"></textarea>
+                    <button id="save-changes-btn" class="btn btn-success" style="margin-top: 0.5rem;">
+                        Lưu thay đổi
+                    </button>
+                </div>
+            </section>
+
+            <!-- Recipient Selection -->
+            <section id="recipient-section" style="display: none;">
+                <h2>👤 Chọn người nhận</h2>
+                <div class="form-group">
+                    <label for="recipient-id">ID Người nhận:</label>
+                    <input type="text" id="recipient-id" class="form-control" 
+                           placeholder="Nhập ID người nhận">
+                    <button id="get-recipient-key-btn" class="btn btn-secondary" style="margin-top: 0.5rem;">
+                        Lấy khóa công khai
+                    </button>
+                </div>
+                
+                <div id="recipient-key-info" style="display: none;">
+                    <div class="alert alert-success">
+                        ✅ Đã lấy khóa công khai của người nhận
+                    </div>
+                </div>
+
+                <!-- Online Users List -->
+                <div class="user-list" style="margin-top: 2rem;">
+                    <h3>Người dùng online</h3>
+                    <div id="online-users-list"></div>
+                </div>
+            </section>
+
+            <!-- Send File Section -->
+            <section id="send-section" style="display: none;">
+                <h2>🚀 Gửi file</h2>
+                <div class="send-summary">
+                    <div class="alert alert-info">
+                        <p><strong>File:</strong> <span id="send-file-name"></span></p>
+                        <p><strong>Kích thước:</strong> <span id="send-file-size"></span></p>
+                        <p><strong>Người nhận:</strong> <span id="send-recipient"></span></p>
+                    </div>
+                </div>
+                
+                <button id="encrypt-and-send-btn" class="btn btn-primary btn-large">
+                    <span class="btn-icon">🔐</span>
+                    <span>Mã hóa và gửi</span>
+                </button>
+                
+                <div id="send-progress" style="display: none; margin-top: 1rem;">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 0%">0%</div>
+                    </div>
+                    <p id="progress-status"></p>
+                </div>
+                
+                <div id="send-result" style="display: none; margin-top: 1rem;"></div>
+            </section>
+
+            <!-- Transfer History -->
+            <section id="history-section" style="display: none;">
+                <div class="transfer-history">
+                    <h2>📜 Lịch sử gửi file</h2>
+                    <div id="transfer-history-list"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Secure File Transfer System. <a href="/" style="color: white;">Trang chủ</a></p>
+        </footer>
+    </div>
+
+    <!-- Socket.io -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- CryptoJS for client-side encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- JSEncrypt for RSA -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.3.2/jsencrypt.min.js"></script>
+    <!-- Application Scripts -->
+    <script src="{{ url_for('static', filename='js/crypto.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Initialize sender interface
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSenderInterface();
+        });
+    </script>
+</body>
+</html>
