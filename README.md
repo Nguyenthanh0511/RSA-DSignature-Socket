@@ -304,15 +304,11 @@ Mọi đóng góp đều được chào đón! Vui lòng:
 3. Commit changes (`git commit -m 'Add amazing feature'`)
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Tạo Pull Request
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+.
 
 ## 📞 Liên hệ
 
-- Email: your.email@example.com
-- Project Link: https://github.com/yourusername/secure-file-transfer
+- Email: nguyentrungthanhdev@example.com
 
 ## 🙏 Acknowledgments
 
