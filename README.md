@@ -1,7 +1,7 @@
 # 🔐 Hệ thống truyền file bảo mật với RSA và chữ ký số
 
 Hệ thống truyền file an toàn sử dụng mã hóa RSA, chữ ký số và WebSocket để đảm bảo tính bảo mật và toàn vẹn dữ liệu.
-<img src="./main.jpg">
+
 ## 📋 Tính năng chính
 
 - ✅ **Mã hóa RSA 2048-bit**: Bảo vệ file với thuật toán mã hóa mạnh
