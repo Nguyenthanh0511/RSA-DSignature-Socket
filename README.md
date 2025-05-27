@@ -1,7 +1,7 @@
 # 🔐 Hệ thống truyền file bảo mật với RSA và chữ ký số
 
 Hệ thống truyền file an toàn sử dụng mã hóa RSA, chữ ký số và WebSocket để đảm bảo tính bảo mật và toàn vẹn dữ liệu.
-
+<img src="./main.jpg">
 ## 📋 Tính năng chính
 
 - ✅ **Mã hóa RSA 2048-bit**: Bảo vệ file với thuật toán mã hóa mạnh
@@ -61,7 +61,7 @@ Mở browser và truy cập: http://localhost:5000
 ## 📖 Hướng dẫn sử dụng
 
 ### Người gửi file
-
+<img src="./sender.jpg">
 1. **Truy cập trang Người gửi**
    - Từ trang chủ, click vào "Người gửi"
 
@@ -88,7 +88,7 @@ Mở browser và truy cập: http://localhost:5000
    - Click "Mã hóa và gửi"
    - Theo dõi tiến trình qua progress bar
    - Nhận thông báo khi gửi thành công
-
+<img src="./senderEn.jpg">
 ### Người nhận file
 
 1. **Truy cập trang Người nhận**
