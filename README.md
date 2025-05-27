@@ -1,5 +1,5 @@
 # 🔐 Hệ thống truyền file bảo mật với RSA và chữ ký số
-<img src="./main.jpg">
+<img src="./main_2.jpg">
 Hệ thống truyền file an toàn sử dụng mã hóa RSA, chữ ký số và WebSocket để đảm bảo tính bảo mật và toàn vẹn dữ liệu.
 
 ## 📋 Tính năng chính
